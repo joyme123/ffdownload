@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.staticfile.org/jquery/1.12.0/jquery.min.js"></script>
+    <title>资源下载页面</title>
+</head>
+<body>
+    资源地址: <input id="task" type="text" name="task"> <br>
+    下载次数: <input id="limit" type="number" name="limit"> <br>
+
+    <button type="button" onclick="download()">提交</button>
+
+    <div id="result" class="result">
+
+    </div>
+
+    <script>
+        var timer
+        function download() {
+            var task = $("#task").val()
+            var limit = $("#limit").val()
+            $("#result").html("")
+
+            $.ajax({
+                type: "POST",
+                url: "/v1/api/download",
+                data: {
+                    task: task,
+                    limit: limit
+                },
+                success: function(data) {
+                   var res = JSON.parse(data)
+                    if (res.error === '1') {
+                        alert(res.msg)
+                    } else {
+                        taskID = res.data.taskID
+                        getResult(taskID)
+                        timer = setInterval(function (){getResult(taskID)}, 5000)
+                    }
+                },
+                error: function () {
+                    alert("请求出错")
+                }
+            })
+        }
+        
+        function getResult(taskID) {
+            $.ajax({
+                type: "GET",
+                url: "/v1/api/retrieve?taskID="+taskID,
+                success: function (data) {
+                    var res = JSON.parse(data)
+
+                    if (res.error === '1') {
+                        alert(res.msg)
+                    } else {
+                        result = res.data.result
+                        status = res.data.status
+                        $("#result").html("任务状态:" + status + "<br>" + "任务结果:" + result)
+                        if (status === 'finished' || status === 'failed') {
+                            clearInterval(timer)
+                        }
+                    }
+                },
+                error: function () {
+                    alert("请求出错")
+                }
+            })
+        }
+    </script>
+</body>
+</html>
