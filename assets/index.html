@@ -2,19 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css" type="text/css">
     <script src="https://cdn.staticfile.org/jquery/1.12.0/jquery.min.js"></script>
     <title>资源下载页面</title>
 </head>
 <body>
-    资源地址: <input id="task" type="text" name="task"> <br>
-    下载次数: <input id="limit" type="number" name="limit"> <br>
+    <div class="main">
+        <h1>firefox send下载</h1>
 
-    <button type="button" onclick="download()">提交</button>
+        <div class="tasksubmit">
+            资源地址: <input id="task" type="text" name="task"> <br>
+            下载次数: <input id="limit" type="number" name="limit"> <br>
 
-    <div id="result" class="result">
+            <button type="button" onclick="download()">提交</button>
+        </div>
 
+
+        <div id="result" class="result">
+            当前没有下载任务， 点击提交后不要关闭浏览器
+        </div>
     </div>
-
     <script>
         var timer
         function download() {

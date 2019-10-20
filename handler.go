@@ -12,6 +12,7 @@ import (
 )
 
 var ffsend = "ffsend"
+var path = "./assets"
 
 type Resp struct {
 	Error string `json:"error"`
@@ -159,7 +160,11 @@ func Retrieve(w http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-	path := os.Getenv("UI_PATH")
+	pathEnv := os.Getenv("UI_PATH")
+	if pathEnv != "" {
+		path = pathEnv
+	}
+
 	ffsendEnv := os.Getenv("FFSEND")
 	if ffsendEnv != "" {
 		ffsend = ffsendEnv

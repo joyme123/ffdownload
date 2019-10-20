@@ -1,0 +1,37 @@
+.main {
+    width: 1280px;
+    margin: auto;
+}
+
+.tasksubmit {
+    width: 800px;
+    margin: 200px auto 20px auto;
+    padding: 20px;
+}
+
+.tasksubmit input {
+    width: 600px;
+    height: 40px;
+    padding: 5px;
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+.tasksubmit button {
+    width: 600px;
+    height: 60px;
+    font-size: 20px;
+    margin-left: 80px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    background-color: aquamarine;
+}
+
+.result {
+    width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: cadetblue;
+    color: white;
+    font-size: 20px;
+}
